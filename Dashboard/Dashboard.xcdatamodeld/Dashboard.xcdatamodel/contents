@@ -1,4 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16B2657" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Options" representedClassName=".Options" syncable="YES">
+        <attribute name="count_1" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="count_2" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="count_3" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="count_4" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="count_5" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="option_1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="option_2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="option_3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="option_4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="option_5" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="question" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TrackingItem" inverseName="answerChoices" inverseEntity="TrackingItem" syncable="YES"/>
+    </entity>
+    <entity name="TrackingItem" representedClassName=".TrackingItem" syncable="YES">
+        <attribute name="hasGoal" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isActive" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="question" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="answerChoices" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Options" inverseName="question" inverseEntity="Options" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="TrackingItem" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="Options" positionX="-54" positionY="18" width="128" height="210"/>
+    </elements>
 </model>

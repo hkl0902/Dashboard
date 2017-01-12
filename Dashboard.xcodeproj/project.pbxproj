@@ -12,6 +12,10 @@
 		4791E80C1E281B7900CCEE38 /* Dashboard.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4791E80A1E281B7900CCEE38 /* Dashboard.xcdatamodeld */; };
 		4791E80E1E281B7900CCEE38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4791E80D1E281B7900CCEE38 /* Assets.xcassets */; };
 		4791E81C1E281B7900CCEE38 /* DashboardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4791E81B1E281B7900CCEE38 /* DashboardTests.swift */; };
+		4791E83B1E2834DA00CCEE38 /* TrackingItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4791E8371E2834DA00CCEE38 /* TrackingItem+CoreDataClass.swift */; };
+		4791E83C1E2834DA00CCEE38 /* TrackingItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4791E8381E2834DA00CCEE38 /* TrackingItem+CoreDataProperties.swift */; };
+		4791E83D1E2834DA00CCEE38 /* Options+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4791E8391E2834DA00CCEE38 /* Options+CoreDataClass.swift */; };
+		4791E83E1E2834DA00CCEE38 /* Options+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4791E83A1E2834DA00CCEE38 /* Options+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +38,10 @@
 		4791E8171E281B7900CCEE38 /* DashboardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DashboardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4791E81B1E281B7900CCEE38 /* DashboardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTests.swift; sourceTree = "<group>"; };
 		4791E81D1E281B7900CCEE38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4791E8371E2834DA00CCEE38 /* TrackingItem+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TrackingItem+CoreDataClass.swift"; sourceTree = "<group>"; };
+		4791E8381E2834DA00CCEE38 /* TrackingItem+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TrackingItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		4791E8391E2834DA00CCEE38 /* Options+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Options+CoreDataClass.swift"; sourceTree = "<group>"; };
+		4791E83A1E2834DA00CCEE38 /* Options+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Options+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,11 +83,11 @@
 		4791E8021E281B7900CCEE38 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				4791E82E1E28338500CCEE38 /* Core Data */,
 				4791E8031E281B7900CCEE38 /* AppDelegate.swift */,
 				4791E8051E281B7900CCEE38 /* HomeViewController.swift */,
 				4791E80D1E281B7900CCEE38 /* Assets.xcassets */,
 				4791E8121E281B7900CCEE38 /* Info.plist */,
-				4791E80A1E281B7900CCEE38 /* Dashboard.xcdatamodeld */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -91,6 +99,18 @@
 				4791E81D1E281B7900CCEE38 /* Info.plist */,
 			);
 			path = DashboardTests;
+			sourceTree = "<group>";
+		};
+		4791E82E1E28338500CCEE38 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				4791E8371E2834DA00CCEE38 /* TrackingItem+CoreDataClass.swift */,
+				4791E8381E2834DA00CCEE38 /* TrackingItem+CoreDataProperties.swift */,
+				4791E8391E2834DA00CCEE38 /* Options+CoreDataClass.swift */,
+				4791E83A1E2834DA00CCEE38 /* Options+CoreDataProperties.swift */,
+				4791E80A1E281B7900CCEE38 /* Dashboard.xcdatamodeld */,
+			);
+			name = "Core Data";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,9 +216,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4791E83E1E2834DA00CCEE38 /* Options+CoreDataProperties.swift in Sources */,
 				4791E8061E281B7900CCEE38 /* HomeViewController.swift in Sources */,
 				4791E80C1E281B7900CCEE38 /* Dashboard.xcdatamodeld in Sources */,
+				4791E83D1E2834DA00CCEE38 /* Options+CoreDataClass.swift in Sources */,
+				4791E83B1E2834DA00CCEE38 /* TrackingItem+CoreDataClass.swift in Sources */,
 				4791E8041E281B7900CCEE38 /* AppDelegate.swift in Sources */,
+				4791E83C1E2834DA00CCEE38 /* TrackingItem+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

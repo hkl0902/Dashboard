@@ -21,6 +21,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         navController = UINavigationController(rootViewController: HomeViewController(collectionViewLayout: UICollectionViewFlowLayout()))
         window?.rootViewController = navController
+        /**
+        setupData()
+        let context = self.persistentContainer.viewContext
+        if let items = try? context.fetch(TrackingItem.createFetchRequest()) {
+            for i in items {
+                print(i)
+            }
+        }
+        deleteData()
+        **/
         return true
     }
 
@@ -50,6 +60,94 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - Core Data stack
 
+    // CoreDataTest
+    func setupData() {
+        let context = self.persistentContainer.viewContext
+        // Tracking Items
+        var t01: TrackingItem!
+        var t02: TrackingItem!
+        var t03: TrackingItem!
+        if let t1 = NSEntityDescription.insertNewObject(forEntityName: "TrackingItem", into: context) as? TrackingItem {
+            t1.hasGoal = false
+            t1.isActive = true
+            t1.name = "T1"
+            t1.question = "What would you like to do 1?"
+            t01 = t1
+        }
+        if let t2 = NSEntityDescription.insertNewObject(forEntityName: "TrackingItem", into: context) as? TrackingItem {
+            t2.hasGoal = false
+            t2.isActive = true
+            t2.name = "T2"
+            t2.question = "What would you like to do 2?"
+            t02 = t2
+        }
+        if let t3 = NSEntityDescription.insertNewObject(forEntityName: "TrackingItem", into: context) as? TrackingItem {
+            t3.hasGoal = false
+            t3.isActive = true
+            t3.name = "T2"
+            t3.question = "What would you like to do 3?"
+            t03 = t3
+        }
+
+        if let yes_no = NSEntityDescription.insertNewObject(forEntityName: "Options", into: context) as? Options {
+            yes_no.count_1 = 0
+            yes_no.count_2 = 0
+            yes_no.count_3 = 0
+            yes_no.count_4 = 0
+            yes_no.count_5 = 0
+            yes_no.option_1 = "Yes"
+            yes_no.option_2 = "No"
+            yes_no.option_3 = nil
+            yes_no.option_4 = nil
+            yes_no.option_5 = nil
+            yes_no.question = t01
+        }
+
+        if let q2 = NSEntityDescription.insertNewObject(forEntityName: "Options", into: context) as? Options {
+            q2.count_1 = 0
+            q2.count_2 = 0
+            q2.count_3 = 0
+            q2.count_4 = 0
+            q2.count_5 = 0
+            q2.option_1 = "Q2_1"
+            q2.option_2 = "Q2_2"
+            q2.option_3 = "Q2_3"
+            q2.option_4 = "Q2_4"
+            q2.option_5 = "Q2_5"
+            q2.question = t02
+        }
+
+        if let q3 = NSEntityDescription.insertNewObject(forEntityName: "Options", into: context) as? Options {
+            q3.count_1 = 0
+            q3.count_2 = 0
+            q3.count_3 = 0
+            q3.count_4 = 0
+            q3.count_5 = 0
+            q3.option_1 = "Q3_1"
+            q3.option_2 = "Q3_2"
+            q3.option_3 = "Q3_3"
+            q3.option_4 = "Q3_4"
+            q3.option_5 = "Q3_5"
+            q3.question = t03
+        }
+        self.saveContext()
+    }
+
+    func deleteData() {
+        let context = self.persistentContainer.viewContext
+        if let options = try? context.fetch(Options.createFetchRequest()) {
+            for option in options {
+                context.delete(option)
+            }
+        }
+        if let items = try? context.fetch(TrackingItem.createFetchRequest()) {
+            for i in items {
+                context.delete(i)
+            }
+        }
+        self.saveContext()
+    }
+
     lazy var persistentContainer: NSPersistentContainer = {
         /*
          The persistent container for the application. This implementation
@@ -62,7 +160,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                 
+
                 /*
                  Typical reasons for an error here include:
                  * The parent directory does not exist, cannot be created, or disallows writing.
@@ -94,4 +192,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 }
-

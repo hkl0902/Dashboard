@@ -12,7 +12,7 @@ import CoreData
 
 extension TrackingItem {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<TrackingItem> {
+    @nonobjc public class func createFetchRequest() -> NSFetchRequest<TrackingItem> {
         return NSFetchRequest<TrackingItem>(entityName: "TrackingItem");
     }
 

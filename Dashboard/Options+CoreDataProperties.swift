@@ -12,7 +12,7 @@ import CoreData
 
 extension Options {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Options> {
+    @nonobjc public class func createFetchRequest() -> NSFetchRequest<Options> {
         return NSFetchRequest<Options>(entityName: "Options");
     }
 

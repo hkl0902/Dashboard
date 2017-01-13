@@ -24,9 +24,13 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
         self.navigationItem.title = "Home"
         self.collectionView?.translatesAutoresizingMaskIntoConstraints = false
         self.collectionView?.backgroundColor = UIColor.darkGray
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(HomeViewController.beginAddingNewTrackingItem))
         
         // Register Reuse Identifier
         self.collectionView?.register(TrackedItemCell.self, forCellWithReuseIdentifier: "TrackedItemQuickViewCell")
+        
+        // testing
+        self.beginAddingNewTrackingItem()
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,6 +60,13 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+    
+    // Selectors
+    
+    func beginAddingNewTrackingItem() {
+        let addingVC = AddingNewTrackingItemCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        self.navigationController?.pushViewController(addingVC, animated: true)
     }
 }
 

@@ -40,7 +40,7 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = self.collectionView?.dequeueReusableCell(withReuseIdentifier: "TrackedItemQuickViewCell", for: indexPath) as! TrackedItemCell
-        cell.title = trackedItems?[indexPath.row].name
+        cell.title = trackedItems?[indexPath.row].question
         if cell.options == nil {
             cell.options = trackedItems?[indexPath.row].answerChoices?.optionsToArray()
         }
@@ -51,11 +51,11 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.view.frame.width*0.9, height: 150)
+        return CGSize(width: self.view.frame.width, height: 150)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
 }
 
@@ -66,7 +66,6 @@ class TrackedItemCell: UICollectionViewCell {
             titleLabel?.text = title
             titleLabel?.textAlignment = .center
             titleLabel?.preferredMaxLayoutWidth = NSAttributedString(string: title!).size().width
-            titleLabel?.backgroundColor = UIColor(red: 0.235, green: 0.541, blue: 0.776, alpha: 1.00)
         }
     }
     
@@ -87,13 +86,16 @@ class TrackedItemCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor(red: 0.082, green: 0.537, blue: 0.788, alpha: 1.00)
-        titleLabel = UILabel(frame: CGRect(x: 8, y: 8, width: self.frame.width * 0.33, height: self.frame.height - 16))
+        self.backgroundColor = UIColor(red: 0.522, green: 0.596, blue: 0.110, alpha: 1.00)
+        titleLabel = UILabel(frame: CGRect(x: 8, y: 0, width: self.frame.width * 0.33, height: self.frame.height))
         titleLabel?.lineBreakMode = .byWordWrapping
         titleLabel?.numberOfLines = 50
+        let layer = titleLabel?.layer
+        layer?.backgroundColor = UIColor.clear.cgColor
         
         optionsTableViewController = HomeOptionsTableViewController()
-        optionsTableViewController!.tableView.frame = CGRect(x: self.frame.width * 0.33 + 8, y: 8, width: self.frame.width * (1-0.33) - 8, height: self.frame.height - 16)
+        optionsTableViewController!.tableView.frame = CGRect(x: self.frame.width * 0.33 + 8, y: 0, width: self.frame.width * (1-0.33)-8, height: self.frame.height)
+        optionsTableViewController!.tableView.layer.borderColor = UIColor.brown.cgColor
         
         addSubview(titleLabel!)
         addSubview(optionsTableViewController!.tableView)

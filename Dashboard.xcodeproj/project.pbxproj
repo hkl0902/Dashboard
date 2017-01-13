@@ -413,6 +413,7 @@
 				4791E8221E281B7900CCEE38 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4791E8231E281B7900CCEE38 /* Build configuration list for PBXNativeTarget "DashboardTests" */ = {
 			isa = XCConfigurationList;
@@ -421,6 +422,7 @@
 				4791E8251E281B7900CCEE38 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

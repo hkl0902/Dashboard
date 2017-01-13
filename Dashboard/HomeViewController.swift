@@ -70,8 +70,16 @@ class TrackedItemCell: UICollectionViewCell {
         }
     }
     
-    var options: [String]?
-    var counts: [Int]?
+    var options: [String]? {
+        didSet {
+            optionsTableViewController?.options = self.options
+        }
+    }
+    var counts: [Int]? {
+        didSet {
+            optionsTableViewController?.counts = self.counts
+        }
+    }
     
     var titleLabel: UILabel?
     
@@ -85,6 +93,8 @@ class TrackedItemCell: UICollectionViewCell {
         titleLabel?.numberOfLines = 50
         
         optionsTableViewController = HomeOptionsTableViewController()
+        optionsTableViewController!.tableView.frame = CGRect(x: self.frame.width * 0.33 + 8, y: 8, width: self.frame.width * (1-0.33) - 8, height: self.frame.height - 16)
+        
         addSubview(titleLabel!)
         addSubview(optionsTableViewController!.tableView)
 

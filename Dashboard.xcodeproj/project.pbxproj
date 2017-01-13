@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		478DD5331E287F130080D944 /* HomeOptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478DD5321E287F130080D944 /* HomeOptionsTableViewController.swift */; };
 		4791E8041E281B7900CCEE38 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4791E8031E281B7900CCEE38 /* AppDelegate.swift */; };
 		4791E8061E281B7900CCEE38 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4791E8051E281B7900CCEE38 /* HomeViewController.swift */; };
 		4791E80C1E281B7900CCEE38 /* Dashboard.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4791E80A1E281B7900CCEE38 /* Dashboard.xcdatamodeld */; };
@@ -29,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		478DD5321E287F130080D944 /* HomeOptionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeOptionsTableViewController.swift; sourceTree = "<group>"; };
 		4791E8001E281B7900CCEE38 /* Dashboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dashboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4791E8031E281B7900CCEE38 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4791E8051E281B7900CCEE38 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				4791E82E1E28338500CCEE38 /* Core Data */,
 				4791E8031E281B7900CCEE38 /* AppDelegate.swift */,
 				4791E8051E281B7900CCEE38 /* HomeViewController.swift */,
+				478DD5321E287F130080D944 /* HomeOptionsTableViewController.swift */,
 				4791E80D1E281B7900CCEE38 /* Assets.xcassets */,
 				4791E8121E281B7900CCEE38 /* Info.plist */,
 			);
@@ -219,6 +222,7 @@
 				4791E83E1E2834DA00CCEE38 /* Options+CoreDataProperties.swift in Sources */,
 				4791E8061E281B7900CCEE38 /* HomeViewController.swift in Sources */,
 				4791E80C1E281B7900CCEE38 /* Dashboard.xcdatamodeld in Sources */,
+				478DD5331E287F130080D944 /* HomeOptionsTableViewController.swift in Sources */,
 				4791E83D1E2834DA00CCEE38 /* Options+CoreDataClass.swift in Sources */,
 				4791E83B1E2834DA00CCEE38 /* TrackingItem+CoreDataClass.swift in Sources */,
 				4791E8041E281B7900CCEE38 /* AppDelegate.swift in Sources */,

@@ -21,16 +21,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         navController = UINavigationController(rootViewController: HomeViewController(collectionViewLayout: UICollectionViewFlowLayout()))
         window?.rootViewController = navController
+        //setupData()
         /**
-        setupData()
         let context = self.persistentContainer.viewContext
         if let items = try? context.fetch(TrackingItem.createFetchRequest()) {
             for i in items {
                 print(i)
             }
         }
-        deleteData()
         **/
+        //deleteData()
         return true
     }
 
@@ -90,8 +90,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         if let yes_no = NSEntityDescription.insertNewObject(forEntityName: "Options", into: context) as? Options {
-            yes_no.count_1 = 0
-            yes_no.count_2 = 0
+            yes_no.count_1 = 15
+            yes_no.count_2 = 30
             yes_no.count_3 = 0
             yes_no.count_4 = 0
             yes_no.count_5 = 0
@@ -104,11 +104,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         if let q2 = NSEntityDescription.insertNewObject(forEntityName: "Options", into: context) as? Options {
-            q2.count_1 = 0
-            q2.count_2 = 0
-            q2.count_3 = 0
-            q2.count_4 = 0
-            q2.count_5 = 0
+            q2.count_1 = 5
+            q2.count_2 = 2
+            q2.count_3 = 8
+            q2.count_4 = 12
+            q2.count_5 = 3
             q2.option_1 = "Q2_1"
             q2.option_2 = "Q2_2"
             q2.option_3 = "Q2_3"
@@ -118,11 +118,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         if let q3 = NSEntityDescription.insertNewObject(forEntityName: "Options", into: context) as? Options {
-            q3.count_1 = 0
-            q3.count_2 = 0
-            q3.count_3 = 0
-            q3.count_4 = 0
-            q3.count_5 = 0
+            q3.count_1 = 103
+            q3.count_2 = 32
+            q3.count_3 = 43
+            q3.count_4 = 3
+            q3.count_5 = 2
             q3.option_1 = "Q3_1"
             q3.option_2 = "Q3_2"
             q3.option_3 = "Q3_3"

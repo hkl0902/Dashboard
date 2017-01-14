@@ -10,16 +10,16 @@ import UIKit
 
 class AddingNewTrackingItemOptionsTableViewController: UITableViewController {
     
-    static let COMMON_OPTIONS = ["Yes/No", "Ranges of 5", "Tally"]
+    var userCreatedOptions: [String]? {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "New User Created Option")
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,23 +31,30 @@ class AddingNewTrackingItemOptionsTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return (userCreatedOptions?.count ?? 0) + 1
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "New User Created Option", for: indexPath)
 
-        // Configure the cell...
+        if indexPath.row == (userCreatedOptions?.count ?? 0) {
+            cell.contentView.addSubview(UIButton(type: .contactAdd))
+            return cell
+        }
+        
+        cell.contentView.addSubview(UIButton(type: .system))
+        cell.layer.backgroundColor = UIColor.darkGray.withAlphaComponent(CGFloat(1.0/(Double(indexPath.row + 1)))).cgColor
+        cell.isUserInteractionEnabled = false
 
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.

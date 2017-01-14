@@ -24,6 +24,10 @@ class AddingNewTrackingItemCollectionViewController: UICollectionViewController,
         
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+    }
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
     }
@@ -34,7 +38,6 @@ class AddingNewTrackingItemCollectionViewController: UICollectionViewController,
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("Number of Items in Section")
         return AddingNewTrackingItemCollectionViewController.CELL_TITLES.count
     }
     
@@ -42,6 +45,7 @@ class AddingNewTrackingItemCollectionViewController: UICollectionViewController,
         print("cell for item at")
         let cell = self.collectionView?.dequeueReusableCell(withReuseIdentifier: "AddingNewTrackedItemCell", for: indexPath) as! NewTrackingItemCollectionViewCell
         cell.title = AddingNewTrackingItemCollectionViewController.CELL_TITLES[indexPath.row]
+        cell.frame.size = CGSize(width: collectionView.frame.width, height: cell.preferredHeight ?? 150)
         return cell
     }
     
@@ -70,6 +74,8 @@ class NewTrackingItemCollectionViewCell: UICollectionViewCell {
     }
     
     var label: UILabel?
+    
+    var preferredHeight: CGFloat?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -101,6 +107,7 @@ class NewTrackingItemCollectionViewCell: UICollectionViewCell {
                 textField.autocorrectionType = .no
                 //textField.translatesAutoresizingMaskIntoConstraints = false
                 self.addSubview(textField)
+                preferredHeight = textField.frame.height
             case AddingNewTrackingItemCollectionViewController.CELL_TITLES[2]:  //Answers
                 
                 // Common Options
@@ -139,6 +146,7 @@ class NewTrackingItemCollectionViewCell: UICollectionViewCell {
                 newUserCreatedOptions.tableView.frame.origin = CGPoint(x: 0, y: commonOptionsView.frame.height)
                 self.contentView.addSubview(newUserCreatedOptions.tableView)
                 self.contentView.addSubview(commonOptionsView)
+                preferredHeight = commonOptionsView.frame.height + newUserCreatedOptions.tableView.frame.height
             case AddingNewTrackingItemCollectionViewController.CELL_TITLES[3]:  //Goal
                 fallthrough
             case AddingNewTrackingItemCollectionViewController.CELL_TITLES[4]:  //Track Automatically

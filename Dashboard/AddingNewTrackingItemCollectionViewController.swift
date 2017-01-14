@@ -73,8 +73,8 @@ class NewTrackingItemCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        //print(frame)
         self.backgroundColor = UIColor.lightGray
+        self.contentView.clipsToBounds = true
     }
     
     override func layoutSubviews() {
@@ -83,6 +83,7 @@ class NewTrackingItemCollectionViewCell: UICollectionViewCell {
         // Label
         label = UILabel(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
         label?.text = title!
+        label?.translatesAutoresizingMaskIntoConstraints = false
         self.label?.frame.size = self.label!.intrinsicContentSize
         self.label?.layer.borderColor = UIColor.cyan.cgColor
         self.contentView.addSubview(label!)
@@ -92,37 +93,50 @@ class NewTrackingItemCollectionViewCell: UICollectionViewCell {
             case AddingNewTrackingItemCollectionViewController.CELL_TITLES[0]:  //Name
                 fallthrough
             case AddingNewTrackingItemCollectionViewController.CELL_TITLES[1]:  //Question
-                print(self)
                 let textField = MaxTextField(frame: CGRect(x: (label?.frame.maxX)! + 8, y: (self.label?.frame.minY)!, width: self.frame.width - (self.label?.frame.maxX)! - 8, height: (self.label?.frame.height)!))
                 textField.backgroundColor = UIColor(red: 0.969, green: 0.341, blue: 0.251, alpha: 1.00)
                 textField.placeholder = "Title?"
                 textField.textAlignment = .left
                 textField.delegate = textField
                 textField.autocorrectionType = .no
+                //textField.translatesAutoresizingMaskIntoConstraints = false
                 self.addSubview(textField)
             case AddingNewTrackingItemCollectionViewController.CELL_TITLES[2]:  //Answers
                 
                 // Common Options
                 let commonOptionsView = UIView(frame: CGRect(x: (label?.frame.maxX)! + 8, y: (self.label?.frame.minY)!, width: self.frame.width - (self.label?.frame.maxX)! - 8, height: (self.label?.frame.height)!))
                 commonOptionsView.backgroundColor = UIColor.brown
+                //commonOptionsView.translatesAutoresizingMaskIntoConstraints = false
                 
+                // Yes/No Button
                 let yes_noButton = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
                 yes_noButton.backgroundColor = UIColor.black
                 yes_noButton.setTitle("Yes/No", for: .normal)
                 yes_noButton.adjustsImageWhenHighlighted = true
                 yes_noButton.frame.size = yes_noButton.intrinsicContentSize
                 commonOptionsView.addSubview(yes_noButton)
+                //yes_noButton.translatesAutoresizingMaskIntoConstraints = false
                 
+                // Tally Button
                 let tallyButton = UIButton(frame: CGRect(x: yes_noButton.frame.maxX + 8, y: 0 , width: 100, height: 100))
                 tallyButton.backgroundColor = UIColor.black
                 tallyButton.setTitle("Tally", for: .normal)
                 tallyButton.adjustsImageWhenHighlighted = true
                 tallyButton.frame.size = tallyButton.intrinsicContentSize
+                //tallyButton.translatesAutoresizingMaskIntoConstraints = false
                 commonOptionsView.addSubview(tallyButton)
+                
+                // Sizing
+                commonOptionsView.frame.size = CGSize(width: commonOptionsView.frame.size.width, height: tallyButton.frame.size.height)
+                let labelWidth = label?.frame.size.width
+                let _ = label?.frame.size.height
+                label?.frame.size = CGSize(width: labelWidth!, height: commonOptionsView.bounds.size.height)
+                label?.layer.borderColor = UIColor.black.cgColor
+                label?.layer.borderWidth = 1
                 
                 // User Created
                 let newUserCreatedOptions = AddingNewTrackingItemOptionsTableViewController(style: .plain)
-                
+                newUserCreatedOptions.tableView.frame.origin = CGPoint(x: 0, y: commonOptionsView.frame.height)
                 self.contentView.addSubview(newUserCreatedOptions.tableView)
                 self.contentView.addSubview(commonOptionsView)
             case AddingNewTrackingItemCollectionViewController.CELL_TITLES[3]:  //Goal

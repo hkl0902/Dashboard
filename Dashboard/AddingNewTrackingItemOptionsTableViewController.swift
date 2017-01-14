@@ -44,7 +44,9 @@ class AddingNewTrackingItemOptionsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "New User Created Option", for: indexPath)
 
         if indexPath.row == (userCreatedOptions?.count ?? 0) {
-            cell.contentView.addSubview(UIButton(type: .contactAdd))
+            let button = UIButton(type: .contactAdd)
+            button.frame.origin = CGPoint(x: 8, y: 8)
+            cell.contentView.addSubview(button)
             return cell
         }
         

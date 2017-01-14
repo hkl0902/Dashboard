@@ -12,12 +12,15 @@ class AddingNewTrackingItemCollectionViewController: UICollectionViewController,
     
     static let CELL_TITLES = ["Name", "Question", "Answers", "Goal (Optional)", "Track Automatically"]
 
+    var reload = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.collectionView?.backgroundColor = UIColor.red
         self.navigationItem.title = "new nav con"
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(AddingNewTrackingItemCollectionViewController.cancel))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(AddingNewTrackingItemCollectionViewController.add))
+        
         
         // register cells
         self.collectionView?.register(NewTrackingItemCollectionViewCell.self, forCellWithReuseIdentifier: "AddingNewTrackedItemCell")
@@ -26,6 +29,10 @@ class AddingNewTrackingItemCollectionViewController: UICollectionViewController,
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        if reload {
+            self.collectionViewLayout.invalidateLayout()
+            reload = false
+        }
     }
     
     override func viewWillLayoutSubviews() {
@@ -50,11 +57,22 @@ class AddingNewTrackingItemCollectionViewController: UICollectionViewController,
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 150)
+        if let cell = collectionView.cellForItem(at: indexPath) {
+            return cell.frame.size
+        }
+        return CGSize(width: collectionView.frame.width, height: 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: 8)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: 8)
     }
     
     func cancel() {

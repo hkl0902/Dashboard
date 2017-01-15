@@ -9,7 +9,9 @@
 import UIKit
 
 class AddingNewTrackingItemOptionsTableViewController: UITableViewController, UITextFieldDelegate {
-    
+
+    // The options that the user is planning to connect to the tracking item being Created
+    // Should be empty at first
     var userCreatedOptions: [String]? {
         didSet {
             self.tableView.reloadData()
@@ -40,11 +42,12 @@ class AddingNewTrackingItemOptionsTableViewController: UITableViewController, UI
         return (userCreatedOptions?.count ?? 0) + 1
     }
 
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "New User Created Option", for: indexPath) as! UserCreatedOptionsTableViewCell
 
         if indexPath.row == (userCreatedOptions?.count ?? 0) {
+            // This cell is where the user would type in the new option
             let button = UIButton(type: .contactAdd)
             button.frame.origin = CGPoint(x: 8, y: 8)
             cell.contentView.addSubview(button)
@@ -56,57 +59,22 @@ class AddingNewTrackingItemOptionsTableViewController: UITableViewController, UI
         cell.inputController = self
         return cell
     }
-    
-    
+
+
 
 }
 
 class UserCreatedOptionsTableViewCell: UITableViewCell {
-    
+
     var textField: UITextField?
-    
+
     var inputController: UITableViewController? {
         didSet {
             textField?.delegate = inputController as! UITextFieldDelegate?
         }
     }
-    
+
     override func draw(_ rect: CGRect) {
         super.draw(rect)
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

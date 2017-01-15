@@ -9,7 +9,8 @@
 import UIKit
 
 class HomeViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-    
+
+    // All the tracked items to be shown in the Home view
     lazy var trackedItems: [TrackingItem]? = {
         let request = TrackingItem.createFetchRequest()
         if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
@@ -25,10 +26,10 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
         self.collectionView?.translatesAutoresizingMaskIntoConstraints = false
         self.collectionView?.backgroundColor = UIColor.darkGray
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(HomeViewController.beginAddingNewTrackingItem))
-        
+
         // Register Reuse Identifier
         self.collectionView?.register(TrackedItemCell.self, forCellWithReuseIdentifier: "TrackedItemQuickViewCell")
-        
+
         // testing
         self.beginAddingNewTrackingItem()
     }
@@ -37,11 +38,11 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return trackedItems?.count ?? 0
     }
-    
+
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = self.collectionView?.dequeueReusableCell(withReuseIdentifier: "TrackedItemQuickViewCell", for: indexPath) as! TrackedItemCell
         cell.title = trackedItems?[indexPath.row].question
@@ -53,25 +54,29 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
         }
         return cell
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: self.view.frame.width, height: 150)
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
-    
+
     // Selectors
-    
+
     func beginAddingNewTrackingItem() {
         let addingVC = AddingNewTrackingItemCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
         self.navigationController?.pushViewController(addingVC, animated: true)
     }
 }
 
+/**
+    Each cell shows a summarized view of each item being tracked
+ */
 class TrackedItemCell: UICollectionViewCell {
-    
+
+    // The title associated with the item
     var title: String? {
         didSet {
             titleLabel?.text = title
@@ -79,22 +84,27 @@ class TrackedItemCell: UICollectionViewCell {
             titleLabel?.preferredMaxLayoutWidth = NSAttributedString(string: title!).size().width
         }
     }
-    
+
+    // The name of the options associated with the item
     var options: [String]? {
         didSet {
             optionsTableViewController?.options = self.options
         }
     }
+
+    // The counts of each option. The indexes match up
     var counts: [Int]? {
         didSet {
             optionsTableViewController?.counts = self.counts
         }
     }
-    
+
+    // Shows t he title
     var titleLabel: UILabel?
-    
+
+    // Shows a "bar graph" view of the option/counts
     var optionsTableViewController: HomeOptionsTableViewController?
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor(red: 0.522, green: 0.596, blue: 0.110, alpha: 1.00)
@@ -103,11 +113,11 @@ class TrackedItemCell: UICollectionViewCell {
         titleLabel?.numberOfLines = 50
         let layer = titleLabel?.layer
         layer?.backgroundColor = UIColor.clear.cgColor
-        
+
         optionsTableViewController = HomeOptionsTableViewController()
         optionsTableViewController!.tableView.frame = CGRect(x: self.frame.width * 0.33 + 8, y: 0, width: self.frame.width * (1-0.33)-8, height: self.frame.height)
         optionsTableViewController!.tableView.layer.borderColor = UIColor.brown.cgColor
-        
+
         addSubview(titleLabel!)
         addSubview(optionsTableViewController!.tableView)
 
@@ -116,40 +126,3 @@ class TrackedItemCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

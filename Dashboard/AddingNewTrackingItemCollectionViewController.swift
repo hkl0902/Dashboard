@@ -9,32 +9,29 @@
 import UIKit
 
 class AddingNewTrackingItemCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-    
+
+    // Titles associated with each cell
     static let CELL_TITLES = ["Name", "Question", "Answers", "Goal (Optional)", "Track Automatically"]
 
-    var reload = true
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // Collection View/Navigation Item setup
         self.collectionView?.backgroundColor = UIColor.red
         self.navigationItem.title = "new nav con"
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(AddingNewTrackingItemCollectionViewController.cancel))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(AddingNewTrackingItemCollectionViewController.add))
-        
-        
+
+
         // register cells
         self.collectionView?.register(NewTrackingItemCollectionViewCell.self, forCellWithReuseIdentifier: "AddingNewTrackedItemCell")
-        
+
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        if reload {
-            self.collectionViewLayout.invalidateLayout()
-            reload = false
-        }
     }
-    
+
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
     }
@@ -47,7 +44,7 @@ class AddingNewTrackingItemCollectionViewController: UICollectionViewController,
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return AddingNewTrackingItemCollectionViewController.CELL_TITLES.count
     }
-    
+
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         print("cell for item at")
         let cell = self.collectionView?.dequeueReusableCell(withReuseIdentifier: "AddingNewTrackedItemCell", for: indexPath) as! NewTrackingItemCollectionViewCell
@@ -55,55 +52,66 @@ class AddingNewTrackingItemCollectionViewController: UICollectionViewController,
         cell.frame.size = CGSize(width: collectionView.frame.width, height: cell.preferredHeight ?? 150)
         return cell
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if let cell = collectionView.cellForItem(at: indexPath) {
             return cell.frame.size
         }
         return CGSize(width: collectionView.frame.width, height: 0)
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: 8)
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: 8)
     }
-    
+
+    // Returns back the main home page
     func cancel() {
         let _ = self.navigationController?.popViewController(animated: true)
     }
-    
+
+    /**
+     Creates new NSEntityDescription of TrackingItem and Options
+     Connects the two as appropriately
+     */
     func add() {
         return
     }
 }
 
 class NewTrackingItemCollectionViewCell: UICollectionViewCell {
+
+    // The name associated with this cell
+    // Specified above in CELL_TITLES
     var title: String? {
         didSet {
             self.layoutSubviews()
         }
     }
-    
+
+    // Shows the title
     var label: UILabel?
-    
+
+    // The "intrinsic height" of the cell
+    // Used to determine how large the cell should be in the collectionView
     var preferredHeight: CGFloat?
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor.lightGray
         self.contentView.clipsToBounds = true
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
-        
+
         // Label
         label = UILabel(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
         label?.text = title!
@@ -111,12 +119,13 @@ class NewTrackingItemCollectionViewCell: UICollectionViewCell {
         self.label?.frame.size = self.label!.intrinsicContentSize
         self.label?.layer.borderColor = UIColor.cyan.cgColor
         self.contentView.addSubview(label!)
-        
+
         if title != nil {
             switch title! {
             case AddingNewTrackingItemCollectionViewController.CELL_TITLES[0]:  //Name
                 fallthrough
             case AddingNewTrackingItemCollectionViewController.CELL_TITLES[1]:  //Question
+                // User defines what the question should be when reporting
                 let textField = MaxTextField(frame: CGRect(x: (label?.frame.maxX)! + 8, y: (self.label?.frame.minY)!, width: self.frame.width - (self.label?.frame.maxX)! - 8, height: (self.label?.frame.height)!))
                 textField.backgroundColor = UIColor(red: 0.969, green: 0.341, blue: 0.251, alpha: 1.00)
                 textField.placeholder = "Title?"
@@ -127,12 +136,12 @@ class NewTrackingItemCollectionViewCell: UICollectionViewCell {
                 self.addSubview(textField)
                 preferredHeight = textField.frame.height
             case AddingNewTrackingItemCollectionViewController.CELL_TITLES[2]:  //Answers
-                
+
                 // Common Options
                 let commonOptionsView = UIView(frame: CGRect(x: (label?.frame.maxX)! + 8, y: (self.label?.frame.minY)!, width: self.frame.width - (self.label?.frame.maxX)! - 8, height: (self.label?.frame.height)!))
                 commonOptionsView.backgroundColor = UIColor.brown
                 //commonOptionsView.translatesAutoresizingMaskIntoConstraints = false
-                
+
                 // Yes/No Button
                 let yes_noButton = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
                 yes_noButton.backgroundColor = UIColor.black
@@ -141,7 +150,7 @@ class NewTrackingItemCollectionViewCell: UICollectionViewCell {
                 yes_noButton.frame.size = yes_noButton.intrinsicContentSize
                 commonOptionsView.addSubview(yes_noButton)
                 //yes_noButton.translatesAutoresizingMaskIntoConstraints = false
-                
+
                 // Tally Button
                 let tallyButton = UIButton(frame: CGRect(x: yes_noButton.frame.maxX + 8, y: 0 , width: 100, height: 100))
                 tallyButton.backgroundColor = UIColor.black
@@ -150,7 +159,7 @@ class NewTrackingItemCollectionViewCell: UICollectionViewCell {
                 tallyButton.frame.size = tallyButton.intrinsicContentSize
                 //tallyButton.translatesAutoresizingMaskIntoConstraints = false
                 commonOptionsView.addSubview(tallyButton)
-                
+
                 // Sizing
                 commonOptionsView.frame.size = CGSize(width: commonOptionsView.frame.size.width, height: tallyButton.frame.size.height)
                 let labelWidth = label?.frame.size.width
@@ -158,7 +167,7 @@ class NewTrackingItemCollectionViewCell: UICollectionViewCell {
                 label?.frame.size = CGSize(width: labelWidth!, height: commonOptionsView.bounds.size.height)
                 label?.layer.borderColor = UIColor.black.cgColor
                 label?.layer.borderWidth = 1
-                
+
                 // User Created
                 let newUserCreatedOptions = AddingNewTrackingItemOptionsTableViewController(style: .plain)
                 newUserCreatedOptions.tableView.frame.origin = CGPoint(x: 0, y: commonOptionsView.frame.height)
@@ -172,12 +181,12 @@ class NewTrackingItemCollectionViewCell: UICollectionViewCell {
             default: break
             }
         }
-        
+
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
+
+
 }

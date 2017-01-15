@@ -8,13 +8,18 @@
 
 import UIKit
 
+/**
+    In the Home View, shows the relative amount of each option in a stacked bar graph
+ */
 class HomeOptionsTableViewController: UITableViewController {
 
+    // Names of the options
     var options: [String]? {
         didSet {
             self.tableView.reloadData()
         }
     }
+    // Counts associated with each option
     var counts: [Int]? {
         didSet {
             self.tableView.reloadData()
@@ -54,15 +59,15 @@ class HomeOptionsTableViewController: UITableViewController {
 
         return cell
     }
-    
+
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let fullHeight = tableView.frame.height
-        let totalCount = counts?.reduce(0, +)
+        let totalCount = counts?.reduce(0, +) // Finds the sum
         if let count = counts?[indexPath.row] {
             return fullHeight * CGFloat(Double(count)/Double(totalCount!))
         }
         return 0
     }
-    
+
 
 }

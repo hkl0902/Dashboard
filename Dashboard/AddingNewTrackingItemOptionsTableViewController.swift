@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddingNewTrackingItemOptionsTableViewController: UITableViewController {
+class AddingNewTrackingItemOptionsTableViewController: UITableViewController, UITextFieldDelegate {
     
     var userCreatedOptions: [String]? {
         didSet {
@@ -19,7 +19,7 @@ class AddingNewTrackingItemOptionsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "New User Created Option")
+        self.tableView.register(UserCreatedOptionsTableViewCell.self, forCellReuseIdentifier: "New User Created Option")
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,71 +36,77 @@ class AddingNewTrackingItemOptionsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
+        print(section)
         return (userCreatedOptions?.count ?? 0) + 1
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "New User Created Option", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "New User Created Option", for: indexPath) as! UserCreatedOptionsTableViewCell
 
         if indexPath.row == (userCreatedOptions?.count ?? 0) {
             let button = UIButton(type: .contactAdd)
             button.frame.origin = CGPoint(x: 8, y: 8)
             cell.contentView.addSubview(button)
-            return cell
+        } else {
+            cell.contentView.addSubview(UIButton(type: .system))
+            cell.layer.backgroundColor = UIColor.darkGray.withAlphaComponent(CGFloat(1.0/(Double(indexPath.row + 1)))).cgColor
+            cell.isUserInteractionEnabled = false
         }
-        
-        cell.contentView.addSubview(UIButton(type: .system))
-        cell.layer.backgroundColor = UIColor.darkGray.withAlphaComponent(CGFloat(1.0/(Double(indexPath.row + 1)))).cgColor
-        cell.isUserInteractionEnabled = false
-
+        cell.inputController = self
         return cell
     }
     
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
 
 }
+
+class UserCreatedOptionsTableViewCell: UITableViewCell {
+    
+    var textField: UITextField?
+    
+    var inputController: UITableViewController? {
+        didSet {
+            textField?.delegate = inputController as! UITextFieldDelegate?
+        }
+    }
+    
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
